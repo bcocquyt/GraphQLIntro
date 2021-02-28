@@ -1,0 +1,357 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GraphQlIntro</name>
+    </assembly>
+    <members>
+        <member name="T:GrapQLIntro.Controllers.CityController">
+            <summary>
+            REST controller for Cities
+            </summary>
+        </member>
+        <member name="M:GrapQLIntro.Controllers.CityController.#ctor(GraphQlIntro.Data.GeoContext)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="context">EF context</param>
+        </member>
+        <member name="M:GrapQLIntro.Controllers.CityController.GetAll">
+            <summary>
+            List all cities, also includes Sites
+            </summary>
+            <returns>List of Cities</returns>
+        </member>
+        <member name="M:GrapQLIntro.Controllers.CityController.GetById(System.Int32)">
+            <summary>
+            Get details for a city
+            </summary>
+            <param name="id">City Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:GrapQLIntro.Controllers.CityController.Create(GraphQlIntro.Model.City)">
+            <summary>
+            Add a new city
+            </summary>
+            <param name="model">City to create</param>
+            <returns>Details for creates city</returns>
+        </member>
+        <member name="M:GrapQLIntro.Controllers.CityController.Put(System.Int32,GraphQlIntro.Model.City)">
+            <summary>
+            Update existing city
+            </summary>
+            <param name="id">id of city</param>
+            <param name="model">city object with new values</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:GrapQLIntro.Controllers.CityController.Delete(System.Int32)">
+            <summary>
+            Delete a city
+            </summary>
+            <param name="id">Id of city to delete</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="T:GraphQLIntro.Controlles.CountryController">
+            <summary>
+            REST controller for Countries
+            </summary>
+        </member>
+        <member name="M:GraphQLIntro.Controlles.CountryController.#ctor(GraphQlIntro.Data.GeoContext)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="context">EF Context</param>
+        </member>
+        <member name="M:GraphQLIntro.Controlles.CountryController.GetAll">
+            <summary>
+            Get list of all countries, including capital, cities and sites of cities
+            </summary>
+            <returns>List of countries</returns>
+        </member>
+        <member name="M:GraphQLIntro.Controlles.CountryController.GetById(System.Int32)">
+            <summary>
+            Get Details of country, including capital, cities and sites of cities
+            </summary>
+            <param name="id">Id of country</param>
+            <returns>Country object</returns>
+        </member>
+        <member name="M:GraphQLIntro.Controlles.CountryController.Create(GraphQlIntro.Model.Country)">
+            <summary>
+            Add a new country
+            </summary>
+            <param name="model">Country to add</param>
+            <returns>Added country</returns>
+        </member>
+        <member name="M:GraphQLIntro.Controlles.CountryController.Put(System.Int32,GraphQlIntro.Model.Country)">
+            <summary>
+            Update existing country
+            </summary>
+            <param name="id">Id of country to update</param>
+            <param name="model">County object with new properties</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="M:GraphQLIntro.Controlles.CountryController.Delete(System.Int32)">
+            <summary>
+            Delete existing country
+            </summary>
+            <param name="id">Id of country to delete</param>
+            <returns>IActionResult</returns>
+        </member>
+        <member name="T:GraphQlIntro.Controllers.HealthController">
+            <summary>
+            API endpoint to check the health of the application.
+            </summary>
+        </member>
+        <member name="M:GraphQlIntro.Controllers.HealthController.#ctor(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GraphQlIntro.Controllers.HealthController"/> class.
+            </summary>
+            <param name="healthCheckService">The service to provide the health of the API application.</param>
+        </member>
+        <member name="M:GraphQlIntro.Controllers.HealthController.Get">
+            <summary>
+                Get Health
+            </summary>
+            <remarks>Provides an indication about the health of the API.</remarks>
+            <response code="200">API is healthy</response>
+            <response code="503">API is unhealthy or in degraded state</response>
+        </member>
+        <member name="T:GraphQlIntro.Data.GeoContext">
+            <summary>
+            EF Context for Geo db using sqlite db
+            </summary>
+        </member>
+        <member name="M:GraphQlIntro.Data.GeoContext.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)">
+            <summary>
+            Configuring the database, for sqlite, set data source filename
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="P:GraphQlIntro.Data.GeoContext.Countries">
+            <summary>
+            Countries table
+            </summary>
+        </member>
+        <member name="P:GraphQlIntro.Data.GeoContext.Cities">
+            <summary>
+            Cities table
+            </summary>
+        </member>
+        <member name="P:GraphQlIntro.Data.GeoContext.Sites">
+            <summary>
+            Sites for Cities tables
+            </summary>
+        </member>
+        <member name="M:GraphQlIntro.Data.GeoContext.CreateCountry(System.String,System.String,System.String[])">
+            <summary>
+            Helper function to create a new country
+            </summary>
+            <param name="countryName">Name of Country</param>
+            <param name="capitalName">Captial of Country</param>
+            <param name="cities">Cities of Country</param>
+            <returns>new Country object</returns>
+        </member>
+        <member name="T:GraphQlIntro.GraphQL.Mutation">
+            <summary>
+            GraphQL Mutations - Changing Data
+            </summary>
+        </member>
+        <member name="M:GraphQlIntro.GraphQL.Mutation.AddCity(GraphQlIntro.Data.GeoContext,System.String,System.String,HotChocolate.Subscriptions.ITopicEventSender)">
+            <summary>
+            Add New City to Existing Country
+            </summary>
+            <param name="context"></param>
+            <param name="country"></param>
+            <param name="city"></param>
+            <param name="eventSender">reference to GraphQL EventSender</param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQlIntro.GraphQL.Mutation.AddCountry(GraphQlIntro.Data.GeoContext,System.String,System.String,HotChocolate.Subscriptions.ITopicEventSender)">
+            <summary>
+            Create new Country, with capital
+            </summary>
+            <param name="context"></param>
+            <param name="country"></param>
+            <param name="captial"></param>
+            <param name="eventSender">reference to GraphQL EventSender</param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQlIntro.GraphQL.Mutation.AddSite(GraphQlIntro.Data.GeoContext,System.Int32,System.String,HotChocolate.Subscriptions.ITopicEventSender)">
+            <summary>
+            Add site to existing city
+            </summary>
+            <param name="context"></param>
+            <param name="cityId"></param>
+            <param name="site"></param>
+            <param name="eventSender"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GraphQlIntro.GraphQL.Query">
+            <summary>
+            GraphQL Queries - Data Retrieval
+            </summary>
+        </member>
+        <member name="M:GraphQlIntro.GraphQL.Query.GetCities(GraphQlIntro.Data.GeoContext,System.String)">
+            <summary>
+            Get list of cities (matching pattern is optional)
+            </summary>
+            <param name="context"></param>
+            <param name="pattern"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQlIntro.GraphQL.Query.GetCity(GraphQlIntro.Data.GeoContext,System.Int32)">
+            <summary>
+            Get Details for one city
+            </summary>
+            <param name="context"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQlIntro.GraphQL.Query.GetCountries(GraphQlIntro.Data.GeoContext)">
+            <summary>
+            Get List of countries
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GraphQlIntro.GraphQL.Subscription">
+            <summary>
+            GraphQL Subscriptions - Notification on mutation execution
+            </summary>
+        </member>
+        <member name="M:GraphQlIntro.GraphQL.Subscription.OnSiteAddedAsync(System.Int32,GraphQlIntro.Data.GeoContext)">
+            <summary>
+            Subscription to trigger when a new site has been added
+            </summary>
+            <param name="siteId">Id of site that was created</param>
+            <param name="context">EF Context</param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQlIntro.GraphQL.Subscription.OnCityAddedAsync(System.Int32,GraphQlIntro.Data.GeoContext)">
+            <summary>
+            Subscription to trigger when a new city has been added
+            </summary>
+            <param name="cityId">Id of added city</param>
+            <param name="context">EF Context</param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQlIntro.GraphQL.Subscription.OnCountryAddedAsync(System.Int32,GraphQlIntro.Data.GeoContext)">
+            <summary>
+            Subscription to trigger when a new country has been added
+            </summary>
+            <param name="countryId">Id of added country</param>
+            <param name="context">EF Context</param>
+            <returns></returns>
+        </member>
+        <member name="T:GraphQlIntro.Model.City">
+            <summary>
+            City model
+            </summary>
+        </member>
+        <member name="P:GraphQlIntro.Model.City.Id">
+            <summary>
+            Unique id for city
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:GraphQlIntro.Model.City.Name">
+            <summary>
+            Local of English name of City
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:GraphQlIntro.Model.City.Sites">
+            <summary>
+            Sites to see in city
+            </summary>
+            <value>Collect of Site</value>
+        </member>
+        <member name="T:GraphQlIntro.Model.Country">
+            <summary>
+            Country model
+            </summary>
+        </member>
+        <member name="P:GraphQlIntro.Model.Country.Id">
+            <summary>
+            unique id for country
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:GraphQlIntro.Model.Country.Name">
+            <summary>
+            English name of Country
+            </summary>
+        </member>
+        <member name="P:GraphQlIntro.Model.Country.Capital">
+            <summary>
+            Captial of Country
+            </summary>
+        </member>
+        <member name="P:GraphQlIntro.Model.Country.Cities">
+            <summary>
+            Some cities in the country
+            </summary>
+        </member>
+        <member name="T:GraphQlIntro.Model.Site">
+            <summary>
+            Site to see in a city
+            </summary>
+        </member>
+        <member name="P:GraphQlIntro.Model.Site.Id">
+            <summary>
+            Unique id for a site
+            </summary>
+        </member>
+        <member name="P:GraphQlIntro.Model.Site.Name">
+            <summary>
+            English name for the site
+            </summary>
+        </member>
+        <member name="T:GraphQlIntro.Program">
+            <summary>
+            Main Assembly Class
+            </summary>
+        </member>
+        <member name="M:GraphQlIntro.Program.Main(System.String[])">
+            <summary>
+            Application Entry Point
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQlIntro.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Create HostBuilder for API
+            </summary>
+            <param name="args">Command line arguments</param>
+            <returns>IHostBuilder</returns>
+        </member>
+        <member name="T:GraphQlIntro.Startup">
+            <summary>
+            Statup class to configure what is in cluded in this API
+            </summary>
+        </member>
+        <member name="M:GraphQlIntro.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:GraphQlIntro.Startup"/> class.
+            </summary>
+        </member>
+        <member name="P:GraphQlIntro.Startup.Configuration">
+            <summary>
+            Gets the configuration of key/value application properties.
+            </summary>
+        </member>
+        <member name="M:GraphQlIntro.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+            </summary>
+            <param name="services">Serivce collection</param>
+        </member>
+        <member name="M:GraphQlIntro.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">IApplicationBuilder</param>
+        </member>
+    </members>
+</doc>
